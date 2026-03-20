@@ -6,6 +6,7 @@ function getReq(){
             method: "GET",
             url: "https://reqres.in/api/users/2",
             headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
                 accept: "application/json"
             }
         }).then(response => {
@@ -24,6 +25,7 @@ export class ReqresApi{
             method: "GET",
             url: "https://reqres.in/api/users?page=2",
             headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
                 accept: "application/json"
             }
         }).then(response => {
@@ -39,6 +41,7 @@ export class ReqresApi{
             method: "GET",
             url: "https://reqres.in/api/users/2",
             headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
                 accept: "application/json"
             }
         }).its('body').its('data')
@@ -50,6 +53,7 @@ export class ReqresApi{
             method: "GET",
             url: "https://reqres.in/api/users/23",
             headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
                 accept: "application/json"
             },
             failOnStatusCode: false
@@ -59,6 +63,10 @@ CreatingUser(){
     return cy.request({
         method: "POST",
         url: "https://reqres.in/api/users",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "name": "morpheus",
@@ -72,6 +80,10 @@ UpdateJob(){
     return cy.request({
         method: "PUT",
         url: "https://reqres.in/api/users/2",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "name": "morpheus",
@@ -84,6 +96,10 @@ UpdateJobWithPatch(){
     return cy.request({
         method: "PATCH",
         url: "https://reqres.in/api/users/2",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "name": "morpheus",
@@ -96,6 +112,10 @@ DeleteUser(){
     return cy.request({
         method: "DELETE",
         url: "https://reqres.in/api/users/2",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         
     }) //.its('Status')
 }
@@ -104,6 +124,10 @@ RegisterUser(){
     return cy.request({
         method: "POST",
         url: "https://reqres.in/api/register",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "email": "eve.holt@reqres.in",
@@ -112,13 +136,34 @@ RegisterUser(){
         
     }) //.its('Status')
 }
-UnableToRegisterUser(){
+UnableToRegisterUserBodyMissingPassword(){
     return cy.request({
         method: "POST",
         url: "https://reqres.in/api/register",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "email": "sydney@fife"
+            },
+        failOnStatusCode: false
+        
+    }) 
+}
+
+UnableToRegisterUserBodyMissingEmail(){
+    return cy.request({
+        method: "POST",
+        url: "https://reqres.in/api/register",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
+        body: 
+            {
+                 "password": "pistol"
             },
         failOnStatusCode: false
         
@@ -129,6 +174,10 @@ Login(){
     return cy.request({
         method: "POST",
         url: "https://reqres.in/api/login",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
             {
                 "email": "eve.holt@reqres.in",
@@ -139,12 +188,34 @@ Login(){
     })
 }
 
-LoginUnsuccessful(){
+LoginUnsuccessfulWrongPassword(){
     return cy.request({
         method: "POST",
         url: "https://reqres.in/api/login",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
         body: 
-            {"email": "peter@klaven"
+            {"email": "peter@klaven",
+            "password": "123"
+            },
+        failOnStatusCode: false
+        
+    })
+}
+
+LoginUnsuccessfulWrongEmail(){
+    return cy.request({
+        method: "POST",
+        url: "https://reqres.in/api/login",
+         headers: {
+                "x-api-key": "reqres_88320d72debe4fe9aafa60cb100646a0",
+                accept: "application/json"
+            },
+        body: 
+            {"email": "peter@klaven",
+            "password": "pistol"
             },
         failOnStatusCode: false
         

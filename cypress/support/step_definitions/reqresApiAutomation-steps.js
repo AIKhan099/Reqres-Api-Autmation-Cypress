@@ -22,12 +22,12 @@ And('I am creating user with the post request.',()=>{
     // console.log(st)
 })
 
-And('I update the job of user.',()=>{
+Given('I update the job of user.',()=>{
     let st = new reqresApi.UpdateJob();
     st.should('have.property','status',200)
 })
 
-And('I update the job of user using patch req.',()=>{
+When('I update the job of user using patch req.',()=>{
     let st = new reqresApi.UpdateJobWithPatch();
     st.should('have.property','status',200)
 })
@@ -37,13 +37,18 @@ And('I delete the user.',()=>{
     st.should('have.property','status',204)
 })
 
-And('I register the user.',()=>{
+Given('I register the user.',()=>{
     let st = new reqresApi.RegisterUser();
     st.should('have.property','status',200)
 })
 
-And('I register the user but remain unsuccessful.',()=>{
-    let st = new reqresApi.UnableToRegisterUser();
+Given('I register the user but remain unsuccessful due to missing password.',()=>{
+    let st = new reqresApi.UnableToRegisterUserBodyMissingPassword();
+    st.should('have.property','status',400)
+})
+
+Given('I register the user but remain unsuccessful due to missing email.',()=>{
+    let st = new reqresApi.UnableToRegisterUserBodyMissingEmail();
     st.should('have.property','status',400)
 })
 
@@ -52,7 +57,12 @@ And('I successfully login.',()=>{
     st.should('have.property','status',200)
 })
 
-And('I was not able to login with wrong credentials.',()=>{
-    let st = new reqresApi.LoginUnsuccessful();
+Given('I was not able to login with wrong password.',()=>{
+    let st = new reqresApi.LoginUnsuccessfulWrongPassword();
+    st.should('have.property','status',400)
+})
+
+Given('I was not able to login with wrong email.',()=>{
+    let st = new reqresApi.LoginUnsuccessfulWrongEmail();
     st.should('have.property','status',400)
 })
